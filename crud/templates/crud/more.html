@@ -1,0 +1,25 @@
+{% extends 'crud/index.html' %}
+
+{% block title %} Detail Page {% endblock %}
+
+{% block content %}
+
+<h1 class="ui center aligned header">Django ToDo Detail</h1>
+    <div style="margin-top: 50px;" class="ui container">
+        <div class="ui segment">
+            <p class="ui big header"> Title:</p>
+            {{ todo.title }}
+        </div>
+        <div class="ui segment">
+            <p class="ui big header"> Description:</p>
+            {{ todo.details }}
+        </div>
+        <div class="ui segment">
+            <p class="ui big header"> Date:</p>
+            {{ todo.date }}
+        </div>
+
+        <a class="ui blue button" href="{% url 'index' %}">&#8592; Back</a>
+    </div>
+    <br>
+{% endblock %}

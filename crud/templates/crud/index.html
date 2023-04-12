@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" 
+    integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" 
+    crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/utilities.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>Todo App - Django</title>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="container flex">
+            <h1 class="logo">Assadiq Codes</h1>
+            <nav>
+                <ul>
+                    <li>
+                        {% if request.user.is_authenticated %}
+                   <p class="user-login-text">Hello, {{ request.user.username }} | <i class="fas fa-lock"></i></p>
+                        {% endif %}
+                    </li>
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li>
+                        {% if request.user.is_authenticated %}
+                           <a href="{% url 'logout' %}"> Logout </a></p>
+                        {% else %}
+                            <p><a href="{% url 'login' %}"> login </a> 
+                            <a href="{% url 'register' %}"> Register </a></p>
+                        {% endif %}
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    {% block content %}
+
+    <!-- Head -->
+    <section class="features-head bg-primary py-3">
+        <div class="container grid">
+            <div>
+                <h1 class="xl">Simple TO-DO App</h1>
+                <p class="lead">
+                    It uses basic Django Crud operations; Add, Update, Retrieve & Delete
+                </p>
+            </div>
+            <img src="{% static 'img/profile.png' %}" alt="">
+        </div>
+    </section>
+
+    
+        <div style="margin-top: 50px;" class="ui container">
+            <section class="features-main my-2">
+                <form class="ui form" action="/add" method="post">
+                    {% csrf_token %}
+                    <div class="field">
+                        <label>Todo Title</label>
+                        <input type="text" name="title" placeholder="Enter ToDo Title...">
+                        <br>
+                        <label>Todo Description</label>
+                        <input type="text" name="details" placeholder="Enter ToDo Description...">
+                        <br>
+                    </div>
+                    <button class="ui blue button" type="submit">&#8595; Add</button>
+                    <a class="ui red button" href="/wipe/{{ x.delete }}">&#8594; Delete All</a>
+                </form>
+                
+
+                <div class="card flex" style="display:list-item;">
+                    {% for todo in todo_list %} 
+                        <p class="ui big header">{{ todo.id }} | <a href="{% url 'more' todo.id %}">{{ todo.title }}</a>
+                        <a class="ui blue button" href="/update/{{ todo.id}}">Complete...?</a>
+                        <a class="ui red button" href="/delete/{{ todo.id }}">Delete</a></p><hr>
+                    {% endfor %}
+                </div>
+            </div>
+            </section>
+
+            <center>
+                {% if todo_list.has_other_pages %}
+            <ul class="pagination">
+                {% if todo_list.has_previous %}
+                    <li><a href="?page={{ todo_list.previous_page_number }}">Previous</a></li>
+                    {% endif %}
+                    {% for i in todo_list.paginator.page_range %}
+                    {% if todo_list.number == i %}
+                    <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                    {% else %}
+                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                    {% if todo_list.has_next %}
+                    <li><a href="?page={{ todo_list.next_page_number }}">Next</a></li>
+                    {% endif %}
+            </ul>
+                {% endif %}
+            </center>
+ 
+        </div>
+        <br>
+            {% endblock %} 
+
+    <!-- Footer -->
+    <footer class="footer bg-dark py-5">
+        <div class="container grid grid-3">
+            <div>
+                <h1>Assadiq Codes
+                </h1>
+                <p>Copyright &copy; 2023</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'read_more' %}">Read More</a></li>
+                    <li><a href="https://assadiq01.github.io/assadiq/">My Portfolio</a></li>
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                </ul>
+            </nav>
+            <div class="social">
+                <a href="https://github.com/Assadiq01/"><i class="fab fa-github fa-2x"></i></a>
+                <a href="https://web.facebook.com/abubakara.yunus.94/"><i class="fab fa-facebook fa-2x"></i></a>
+                <a href="https://www.linkedin.com/in/abubakar-ashiru-yunusa-394745245/"><i class="fab fa-linkedin fa-2x"></i></a>
+                <a href="https://twitter.com/Assadiq15494031"><i class="fab fa-twitter fa-2x"></i></a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
+
+
+
+
+<div style="margin-top: 50px;" class="ui container"></div>
+
+{% if messages %}
+                    {% for message in messages %}
+                        <p style="color:green">{{message}}</p>
+                    {% endfor %}
+                {% endif %}

@@ -1,0 +1,78 @@
+{% extends 'crud/index.html' %}
+
+{% block content %}
+
+<div class="card">
+            What is CRUD? <br>
+        CRUD stands for Create, Read, Update & Delete. These are the four basic operations which are executed on Database Models. We are developing a web app which is capable of performing these operations.
+
+        Since we are developing a library app, let’s take an example of the same. In a library, books are objects. The books have attributes like name, author, etc. We need an application which can perform CRUD operations on book object. <br>
+        The CRUD operations are defined as follows:
+        <br>
+        1. Read Operation <br>
+
+        The ability of the application to read data from the database. <br>
+
+        2. Create Operation
+
+        The ability of the application to store data in the database. <br>
+
+        3. Update Operation
+
+        The ability of the application to edit the stored value in the database. <br>
+
+        4. Delete Operation
+
+        The ability of the application to delete the value in the database. <br>
+
+        We are going to develop the operations in the same order.
+
+        Majority of applications on the internet are CRUD applications. For example – Facebook uses CRUD operations to save your data on their database. You can change your profile picture that means perform the update operation. Of course, you can see the data in-app or browser which is read operation.
+
+        Also, you can delete your Facebook account which is delete operation. Summarising it, almost all the applications you use are CRUD applications.
+
+        For developers, making a CRUD application is one of the very first steps. If you can make a CRUD app from technology then you can start deploying projects.
+
+
+        Python-Django(views, templates & models) <br>
+        Django is a rich web framework written in python. Django is a free and open source and has capabilities to do wonders. Django is fast, takes security issues seriously and exceedingly scalable.
+
+        Instagram, one of the most prolific social media application use the Django framework. Google, the top ten web applications that use Django and you’ll be amazed by its reach. <br>
+
+        Functionality <br>
+        A Django project is a collection of different applications having different functionalities. <br>
+
+        Django allows us to map a requested URL from a user to the code that’s actually meant to handle it and it also allows us to create that requested HTML dynamically.
+
+        By using templates we can actually inject calculated values or information from the database into an HTML page to show to the user.
+
+        So we are gonna connecting all the front end stuff to the backend stuff through this web framework. <br>
+
+
+        Creating Views and Mapping it to URL <br>
+        Everything that you see in Django is a view like a homepage view, or a detail view for e.g. when we open a profile in Instagram then what we see is referring to homepage view and when we open a particular post in that profile then it is detail view.
+
+        To create a view in views.py file and then map it urls.py file we’ll create a view that will show us the most prolific statement of the programming world i.e. “Hello World”.
+
+        <br>
+        1. Create a view in the views.py file in “my_app”. <br>
+
+        2. Create an urls.py file in “my_app” and map the view here i.e. ‘my_app/urls.py’. <br>
+
+        3. Open the urls.py file in “mysite” and map the URL file of “my_app” here i.e. ‘mysite/urls.py’. <br>
+
+        Note: Don’t get confused between the two urls.py file as one belongs to my_app and the other belongs to the project mysite.
+        <br>
+        Models <br>
+        A Model is a source of information about our data. It contains behavioural aspects and other essential features of our data.
+
+        Models are a way to create a database for a Django project. Each model maps to a single database table that is every time you create a model basically it is going to map to a database table.
+
+        From now we will work on a project “polls” given in the documentation of Django. So first go through the first part of the documentation or you just redo the above steps having an application named “polls”.
+
+        SQLite is the default database and if you wish to use the more scalable database for your project then install proper database bindings.
+</div>
+
+
+
+        {% endblock %}
